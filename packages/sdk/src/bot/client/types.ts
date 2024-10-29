@@ -160,3 +160,46 @@ export type ListFiles<_TBot extends BaseBot> = Client['listFiles']
 export type GetFile<_TBot extends BaseBot> = Client['getFile']
 export type UpdateFileMetadata<_TBot extends BaseBot> = Client['updateFileMetadata']
 export type SearchFiles<_TBot extends BaseBot> = Client['searchFiles']
+
+export type ClientOperations<TBot extends BaseBot> = {
+  getConversation: GetConversation<TBot>
+  listConversations: ListConversations<TBot>
+  updateConversation: UpdateConversation<TBot>
+  deleteConversation: DeleteConversation<TBot>
+  listParticipants: ListParticipants<TBot>
+  addParticipant: AddParticipant<TBot>
+  getParticipant: GetParticipant<TBot>
+  removeParticipant: RemoveParticipant<TBot>
+  getEvent: GetEvent<TBot>
+  listEvents: ListEvents<TBot>
+  createMessage: CreateMessage<TBot>
+  getOrCreateMessage: GetOrCreateMessage<TBot>
+  getMessage: GetMessage<TBot>
+  updateMessage: UpdateMessage<TBot>
+  listMessages: ListMessages<TBot>
+  deleteMessage: DeleteMessage<TBot>
+  getUser: GetUser<TBot>
+  listUsers: ListUsers<TBot>
+  updateUser: UpdateUser<TBot>
+  deleteUser: DeleteUser<TBot>
+  getState: GetState<TBot>
+  setState: SetState<TBot>
+  getOrSetState: GetOrSetState<TBot>
+  patchState: PatchState<TBot>
+  callAction: CallAction<TBot>
+  uploadFile: UploadFile<TBot>
+  upsertFile: UpsertFile<TBot>
+  deleteFile: DeleteFile<TBot>
+  listFiles: ListFiles<TBot>
+  getFile: GetFile<TBot>
+  updateFileMetadata: UpdateFileMetadata<TBot>
+  searchFiles: SearchFiles<TBot>
+}
+
+export type ClientInputs<TBot extends BaseBot> = {
+  [K in keyof ClientOperations<TBot>]: Arg<ClientOperations<TBot>[K]>
+}
+
+export type ClientOutputs<TBot extends BaseBot> = {
+  [K in keyof ClientOperations<TBot>]: Awaited<Res<ClientOperations<TBot>[K]>>
+}
